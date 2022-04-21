@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+      args:
+        VARIANT: "1.18-bullseye"
+    volumes:
+      - type: bind
+        source: "./"
+        target: "/home/vscode/workspace"
+    command: sleep infinity
+    security_opt:
+      - apparmor:unconfined
+    cap_add:
+      - SYS_PTRACE
